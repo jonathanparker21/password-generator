@@ -35,7 +35,7 @@ function generatePassword() {
     return charLength = Number(prompt('How many characters would you like your password to contain? Choose a number from 8 to 128.'));
   }
   
-  // this only works is the page is reefreshed - if user ree-enters a number, it appends # to page
+  // ??? this only works is the page is refreshed - if user re-enters a number, it appends # to page
   if (charLength < 8 || charLength > 128) {
     alert('You must enter a number from 8 to 128.');
     return charLength = Number(prompt('How many characters would you like your password to contain? Choose a number from 8 to 128.'));
@@ -49,6 +49,7 @@ function generatePassword() {
   
   // 2. validate the input
   //    a. confirm user selected at least one character type
+  
   if (!hasLowercase && !hasUppercase && !hasNumber && !hasSpecial) {
     alert('You must select at least one character type.')
     hasLowercase = confirm('Click OK to confirm including lowercase characters.');
@@ -57,7 +58,9 @@ function generatePassword() {
     hasSpecial = confirm('Click OK to confirm including special characters.');
   }
   
-  // but will this have app make sure there's at least one of each character selected (or is that beyond the scope of this assignment?)
+  //    b. concatenate user selections & filter out cancels
+  // ??? but will this have app make sure there's at least one of each character selected (or is that beyond the scope of this assignment?)
+
   var passwordChar = '';
   
   if (hasLowercase) {
@@ -78,8 +81,6 @@ function generatePassword() {
   
   console.log(passwordChar);
 
-  //    b. filter out cancels - is this being done automatically above?
-  
   // 3. generate password based on criteria
   //    a. initialize a password variable string to continuously build on
   var generatedPassword = '';
