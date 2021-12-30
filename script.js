@@ -28,70 +28,63 @@ function generatePassword() {
   // 1. prompt the user for the password criteria
   //    a. password length from 8 to 128 characters
   var charLength = Number(prompt('How many characters would you like your password to contain? Choose a number from 8 to 128.'));
-  
+
   //    b. confirm user inputs a number from 8 to 128
   if (!charLength) {
     alert('Please enter a password length.');
-    return charLength = Number(prompt('How many characters would you like your password to contain? Choose a number from 8 to 128.'));
+    generatePassword();
   }
-  
-  // ??? this only works is the page is refreshed - if user re-enters a number, it appends # to page
+
   if (charLength < 8 || charLength > 128) {
     alert('You must enter a number from 8 to 128.');
-    return charLength = Number(prompt('How many characters would you like your password to contain? Choose a number from 8 to 128.'));
+    generatePassword();
   } else {
     //    c. lowercase, uppercase, numbers, special characters
     var hasLowercase = confirm('Click OK to confirm including lowercase characters.');
     var hasUppercase = confirm('Click OK to confirm including uppercase characters.');
     var hasNumber = confirm('Click OK to confirm including numeric characters.');
     var hasSpecial = confirm('Click OK to confirm including special characters.');
-  }
-  
-  // 2. validate the input
-  //    a. confirm user selected at least one character type
-  
-  if (!hasLowercase && !hasUppercase && !hasNumber && !hasSpecial) {
-    alert('You must select at least one character type.')
-    hasLowercase = confirm('Click OK to confirm including lowercase characters.');
-    hasUppercase = confirm('Click OK to confirm including uppercase characters.');
-    hasNumber = confirm('Click OK to confirm including numeric characters.');
-    hasSpecial = confirm('Click OK to confirm including special characters.');
-  }
-  
-  //    b. concatenate user selections & filter out cancels
-  // ??? but will this have app make sure there's at least one of each character selected (or is that beyond the scope of this assignment?)
 
-  var passwordChar = '';
-  
-  if (hasLowercase) {
-    passwordChar += lowerCaseOptions;
-  }
-  
-  if (hasUppercase) {
-    passwordChar += upperCaseOptions;
-  }
-  
-  if (hasNumber) {
-    passwordChar += numberOptions;
-  }
-  
-  if (hasSpecial) {
-    passwordChar += specialOptions;
-  }
-  
-  console.log(passwordChar);
+    // 2. validate the input
+    //    a. confirm user selected at least one character type
+    console.log(hasLowercase, hasUppercase, hasNumber, hasSpecial);
+    if (hasLowercase === false && hasUppercase === false && hasNumber === false && hasSpecial === false) {
+      alert('You must select at least one character type.')
+      generatePassword();
+    }
 
-  // 3. generate password based on criteria
-  //    a. initialize a password variable string to continuously build on
-  var generatedPassword = '';
+    //    b. concatenate user selections & filter out cancels
+    var passwordChar = '';
 
-  //    b. loop over charLength & call generator function for each type
-  for (var i = 0; i < charLength; i++) {
-    generatedPassword += passwordChar[Math.floor(Math.random() * passwordChar.length)];
+    if (hasLowercase) {
+      passwordChar += lowerCaseOptions;
+    }
+
+    if (hasUppercase) {
+      passwordChar += upperCaseOptions;
+    }
+
+    if (hasNumber) {
+      passwordChar += numberOptions;
+    }
+
+    if (hasSpecial) {
+      passwordChar += specialOptions;
+    }
+
+    console.log(passwordChar);
+
+    // 3. generate password based on criteria
+    //    a. initialize a password variable string to continuously build on
+    var generatedPassword = '';
+
+    //    b. loop over charLength & call generator function for each type
+    for (var i = 0; i < charLength; i++) {
+      generatedPassword += passwordChar[Math.floor(Math.random() * passwordChar.length)];
+    }
+
+    console.log(generatedPassword);
   }
-
-  console.log(generatedPassword);
-  
   return generatedPassword;
 
   // 4. display password to the page
@@ -104,7 +97,7 @@ var generateBtn = document.querySelector("#generate");
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
-  
+
   passwordText.value = password;
 }
 
