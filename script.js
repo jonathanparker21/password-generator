@@ -32,12 +32,12 @@ function generatePassword() {
   //    b. confirm user inputs a number from 8 to 128
   if (!charLength) {
     alert('Please enter a password length.');
-    generatePassword();
+    return null;
   }
 
   if (charLength < 8 || charLength > 128) {
     alert('You must enter a number from 8 to 128.');
-    generatePassword();
+    return null;
   } else {
     //    c. lowercase, uppercase, numbers, special characters
     var hasLowercase = confirm('Click OK to confirm including lowercase characters.');
